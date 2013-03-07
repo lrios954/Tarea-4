@@ -14,6 +14,7 @@ gravedad_prom=[]
 
 variaciones=[]
 
+pca=[]
 tablafinal=[]
 
 
@@ -23,7 +24,7 @@ path="hw4_data/"
 dirs=os.listdir(path)
 
 for i in range(len(dirs)):
-	Data=np.loadtxt(path+dirs[i])
+	Data=np.loadtxt(os.path.expanduser(path+dirs[i]))
 
 
 for Data in os.listdir(path):
@@ -71,20 +72,20 @@ for Data in os.listdir(path):
 tablafinal.sort(key=lambda tup: tup[1])
 
 
-Data.write('\n'.join('%f %f %f %f %f' % x for x in table))
+datosFinales.write('\n'.join('%f %f %f %f %f' % x for x in tablafinal))
 
 
 
-for line in table:
+for line in tablafinal:
 
-	theta.append(line[1])
+	angulo.append(line[1])
 	pca.append(repr(line[2])+' '+repr(line[3])+' '+repr(line[4]))
 
 
 n_dimensions=3
 n_measurements=len(pca)
 
-data=numpy.empty((n_dimensions,n_measurements,)) ###Este data no se repite?####################################
+data=np.empty((n_dimensions,n_measurements,)) ###Este data no se repite?####################################
 
 for i in range(n_measurements):
 
@@ -95,7 +96,7 @@ for i in range(n_measurements):
         datosLinea[j]=float(datosLinea[j])
         data.itemset((j,i),datosLinea[j])
 
-covariance_matrix=numpy.cov(data)
+covariance_matrix=np.cov(data)
 
 w,u = eigh(covariance_matrix, overwrite_a = True)
 
@@ -112,9 +113,9 @@ out.write('\n')
 out.write(''.join('%s' % u[:,::-1]))
 out.close()
 
-print 'PCA results exported sucessfully in pca.dat'
 
-angulo = list(set(theta))
+
+angulo = list(set(angulo))
 
 # calcula la gravedad promedio 
 for ang in angulo:
@@ -131,12 +132,12 @@ for ang in angulo:
 		gravedad_prom.append(promedio)
 	
 # graficas 
-pylab.plot(angles, avg_grav, '.')
+pylab.plot(angulo, gravedad_prom, 'b')
 pylab.xlabel('angulo(grados)')
 pylab.ylabel('Gravedad promedio(m/s2)')
 pylab.title('Gravedad/Angulo')
-			#pylab.savefig('gravityplot')
-			#pylab.grid(True)
+pylab.savefig('gravityplot')
+pylab.grid(True)
 
 pylab.show()
 
@@ -153,11 +154,11 @@ def f(x, a, b):
 parameters = (scipy.optimize.curve_fit(f, numpy.array(angulo), numpy.array(variaciones)))[0]
 
 pylab.plot(angulo, f(angulo,parameters[0],parameters[1]), '.')
-pylab.plot(angulo, variaciones, '.')
+pylab.plot(angulo, variaciones, 'b')
 pylab.xlabel('Angulos(grados)')
 pylab.ylabel('Variaciones en gravedad')
 pylab.title('Variaciones en g/angulo')
-		#pylab.grid(True)
+pylab.grid(True)
 pylab.show()
 
 
@@ -165,8 +166,8 @@ pylab.plot(angulos, f(angulos,parameters[0],parameters[1])-variaciones, '.')
 pylab.xlabel('Angulo(grado)')
 pylab.ylabel('Residuo')
 pylab.title('Residuo/Angulo')
-		#pylab.savefig('residueplot')
-		#pylab.grid(True)
+pylab.savefig('residuo')
+pylab.grid(True)
 pylab.show()
 
 
