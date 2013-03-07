@@ -159,7 +159,7 @@ pylab.plot(angulo, variaciones, '.')
 pylab.xlabel('Angulos(grados)')
 pylab.ylabel('Variaciones en gravedad')
 pylab.title('Variaciones en g/angulo')
-		#pylab.grid(True)
+	
 pylab.show()
 
 
@@ -167,8 +167,7 @@ pylab.plot(angulos, f(angulos,parameters[0],parameters[1])-variaciones, '.')
 pylab.xlabel('Angulo(grado)')
 pylab.ylabel('Residuo')
 pylab.title('Residuo/Angulo')
-		#pylab.savefig('residueplot')
-		#pylab.grid(True)
+		
 pylab.show()
 
 
