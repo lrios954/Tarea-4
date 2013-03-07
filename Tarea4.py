@@ -17,7 +17,7 @@ variaciones=[]
 pca=[]
 tablafinal=[]
 
-
+angulo2=[]
 datosFinales=open("data.dat", "w")
 
 path="hw4_data/"
@@ -78,7 +78,7 @@ datosFinales.write('\n'.join('%f %f %f %f %f' % x for x in tablafinal))
 
 for line in tablafinal:
 
-	angulo.append(line[1])
+	angulo2.append(line[1])
 	pca.append(repr(line[2])+' '+repr(line[3])+' '+repr(line[4]))
 
 
@@ -136,7 +136,7 @@ pylab.plot(angulo, gravedad_prom, 'b')
 pylab.xlabel('angulo(grados)')
 pylab.ylabel('Gravedad promedio(m/s2)')
 pylab.title('Gravedad/Angulo')
-pylab.savefig('gravityplot')
+pylab.savefig('Img1')
 pylab.grid(True)
 
 pylab.show()
@@ -158,6 +158,7 @@ pylab.plot(angulo, variaciones, 'b')
 pylab.xlabel('Angulos(grados)')
 pylab.ylabel('Variaciones en gravedad')
 pylab.title('Variaciones en g/angulo')
+pylab.savefig('Img2')
 pylab.grid(True)
 pylab.show()
 
@@ -166,7 +167,7 @@ pylab.plot(angulos, f(angulos,parameters[0],parameters[1])-variaciones, '.')
 pylab.xlabel('Angulo(grado)')
 pylab.ylabel('Residuo')
 pylab.title('Residuo/Angulo')
-pylab.savefig('residuo')
+pylab.savefig('Img3')
 pylab.grid(True)
 pylab.show()
 
