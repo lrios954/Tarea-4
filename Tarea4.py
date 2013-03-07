@@ -19,11 +19,11 @@ tablafinal=[]
 
 datosFinales=open("data.dat", "w")
 
-path="ComputationalPhysicsUniandes/homework/hw4_data/"
+path="hw4_data/"
 dirs=os.listdir(path)
 
-for i in range(1):
-	Data=np.loadtxt("ComputationalPhysicsUniandes/homework/hw4_data/"+dirs[i])
+for i in range(len(dirs)):
+	Data=np.loadtxt(path+dirs[i])
 
 
 for Data in os.listdir(path):
@@ -56,14 +56,12 @@ for Data in os.listdir(path):
 #HASTA AQUI ESTAN TODOS LOS DATOS!!
 
 	#ajuste de polinomios de grado 1 y 2
-	x_fit = numpy.polyfit(numpy.array(tiempo), numpy.array(pos_x), 1.0)
-	y_fit = numpy.polyfit(numpy.array(tiempo), numpy.array(pos_y), 2.0)
+	x_fit = np.polyfit(np.array(tiempo), np.array(pos_x), 1.0)
+	y_fit = np.polyfit(np.array(tiempo), np.array(pos_y), 2.0)
 
 	
 
 #######
-
-#tablafinal.append((int(nombre[1]),float(nombre[3]),float(x_fit[0]),float(y_fit[1]),(-0.5*float(y_fit[0])))) Codigo en revision
 
 	
 	tablafinal.append((int(nombre[1]),float(nombre[3]),float(x_fit[0]),float(y_fit[1]),(-0.5*float(y_fit[0]))))
@@ -116,7 +114,7 @@ out.close()
 
 print 'PCA results exported sucessfully in pca.dat'
 
-angles = list(set(theta))
+angulo = list(set(theta))
 
 # calcula la gravedad promedio 
 for ang in angulo:
@@ -159,7 +157,7 @@ pylab.plot(angulo, variaciones, '.')
 pylab.xlabel('Angulos(grados)')
 pylab.ylabel('Variaciones en gravedad')
 pylab.title('Variaciones en g/angulo')
-	
+		#pylab.grid(True)
 pylab.show()
 
 
@@ -167,7 +165,8 @@ pylab.plot(angulos, f(angulos,parameters[0],parameters[1])-variaciones, '.')
 pylab.xlabel('Angulo(grado)')
 pylab.ylabel('Residuo')
 pylab.title('Residuo/Angulo')
-		
+		#pylab.savefig('residueplot')
+		#pylab.grid(True)
 pylab.show()
 
 
